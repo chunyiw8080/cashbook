@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "id": "h_8cqqYxU",
+      "title": "工资",
+      "time": "2023-12-25",
+      "type": "1",
+      "account": "1253",
+      "remarks": ""
+    },
+    {
+      "id": "WdbpPbnJF",
+      "title": "购物",
+      "time": "2023-12-25",
+      "type": "-1",
+      "account": "12",
+      "remarks": ""
+    },
+    {
+      "id": "eooEm0_7R",
+      "title": "购物",
+      "time": "2023-12-25",
+      "type": "-1",
+      "account": "5",
+      "remarks": ""
+    }
+  ]
+}
