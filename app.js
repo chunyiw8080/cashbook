@@ -3,11 +3,25 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const mongoStore = require('connect-mongo');
+const {dbHost, dbPort, dbName} = require('./config/config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/web/index');
+const authRouter = require('./routes/web/auth');
+const authAPIRouter = require('./routes/api/auth');
+const accountRouter = require('./routes/api/account');
 
 var app = express();
+
+app.use(session({
+  name: 'sid', 
+  secret: 'atguigu', 
+  saveUninitialized: false, 
+  resave: true, 
+  store: mongoStore.create({mongoUrl: `mongodb://${dbHost}:${dbPort}/${dbName}`}),
+  cookie: {httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 1} //httpOnly:开启后前端无法通过JS操作
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,11 +34,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', authRouter);
+app.use('/api', accountRouter);
+app.use('/api', authAPIRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  res.render('404')
 });
 
 // error handler
