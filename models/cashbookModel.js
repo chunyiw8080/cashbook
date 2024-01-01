@@ -7,11 +7,12 @@ let cashBookSchema = new mongoose.Schema({
     time: Date,
     type: {type: Number, default: -1},
     account: {type: Number, required: true},
-    remarks: String
+    remarks: String,
+    uuid: String
 });
 
 //创建模型对象  对文档操作的封装对象
-let cashbookModel = mongoose.model('cashbook', cashBookSchema);
+let cashbookModel = mongoose.model('posts', cashBookSchema);
 
 //暴露模型对象
 module.exports = cashbookModel;

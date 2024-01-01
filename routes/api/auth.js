@@ -11,12 +11,12 @@ router.post('/login', async function(req, res){
         let data = await mongo.findRecords(userModel, {username: username, password: md5(password)}, userModel.findOne, null);
         
         if(!data){
-            res.json({code: '2002', msg: '用户名或密码错误', data: null});
+            res.json({code: '2002', msg: 'Incorrect username or password', data: null});
             return;
         }
         //创建当前用户的token
         let token = jwt.sign(
-            {username: data.username, _id: data._id}, 
+            {username: data.username, _id: data._id, uuid: data.uuid}, 
             secret, 
             {expiresIn: 60 * 60 * 24}
         );

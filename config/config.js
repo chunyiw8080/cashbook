@@ -1,6 +1,6 @@
 module.exports = {
     dbHost: 'localhost',
     dbPort: '27017',
-    dbName: 'bilibili',
+    dbName: 'cashbook',
     secret: 'atguigu'
 }

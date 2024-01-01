@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 //设置集合中文档的属性以及属性值的类型
 let userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    uuid: String,
+    reg_date: Date
 });
 
 //创建模型对象  对文档操作的封装对象
